@@ -39,7 +39,9 @@
          encode_pct/2,
          resolve/2,
          merge/2,
-         remove_dot_segments/1]).
+         remove_dot_segments/1,
+         hide_userinfo/1
+        ]).
 
 %% @spec decode(string()) -> {ok, uri(), string()}
 %% @doc Decode an URI.
@@ -207,4 +209,9 @@ remove_dot_segments2(Path, ".") ->
 remove_dot_segments2(Path, "/") ->
   "/" ++ Path.
 
+hide_userinfo(Uri = #ex_uri{authority=
+                                Authority = #ex_uri_authority{userinfo=Info}})
+  when Info =/= undefined ->
+    Uri#ex_uri{authority = Authority#ex_uri_authority{userinfo="xxx:yyy@"}};
+hide_userinfo(Uri = #ex_uri{}) -> Uri.
 
