@@ -95,7 +95,10 @@ encode(Authority, Path, Query, Fragment, Acc) ->
   Acc1 = case Authority of
            undefined -> Acc;
            A -> encode_authority(A, [$/, $/ | Acc]) end,
-  Acc2 = [Path | Acc1],
+  Acc2 = case Path of
+             undefined -> Acc1;
+             _ -> [Path | Acc1]
+         end,
   Acc3 = case Query of
            undefined -> Acc2;
            Q -> [Q, $? | Acc2] end,
