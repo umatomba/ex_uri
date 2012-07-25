@@ -46,17 +46,26 @@
 %% @spec decode(string()) -> {ok, uri(), string()}
 %% @doc Decode an URI.
 decode(String) ->
-  {ok, _URI, _Rest} = ex_uri_parser:decode('URI', String).
+  case ex_uri_parser:decode('URI', String) of
+      {ok, _URI, _Rest} = Ret -> Ret;
+      fail -> {error, invalid_uri}
+  end.
 
 %% @spec decode_ref(string()) -> {ok, ref(), string()}
 %% @doc Decode an URI reference.
 decode_ref(String) ->
-  {ok, _Ref, _Rest} = ex_uri_parser:decode('URI-reference', String).
+    case ex_uri_parser:decode('URI-reference', String) of
+        {ok, _URI, _Rest} = Ret -> Ret;
+        fail -> {error, invalid_uri_ref}
+    end.
 
 %% @spec decode_abs(string()) -> {ok, uri(), string()}
 %% @doc Decode an absolute URI.
 decode_abs(String) ->
-  {ok, _URI, _Rest} = ex_uri_parser:decode('absolute-URI', String).
+    case ex_uri_parser:decode('absolute-URI', String) of
+        {ok, _URI, _Rest} = Ret -> Ret;
+        fail -> {error, invalid_abs_uri}
+    end.
 
 %% @spec decode_pct(string()) -> string()
 %% @doc Decode a percent-encoded string.
