@@ -224,6 +224,6 @@ remove_dot_segments2(Path, "/") ->
 hide_userinfo(Uri = #ex_uri{authority=
                                 Authority = #ex_uri_authority{userinfo=Info}})
   when Info =/= undefined ->
-    Uri#ex_uri{authority = Authority#ex_uri_authority{userinfo="xxx:yyy@"}};
+    Uri#ex_uri{authority = Authority#ex_uri_authority{userinfo="xxx:yyy"}};
 hide_userinfo(Uri = #ex_uri{}) -> Uri.
 
