@@ -1,5 +1,6 @@
 .eunit/
 ebin/
 deps/
+_build/
 doc/
 ex_uri_parser.erl
